@@ -1,5 +1,5 @@
 import { userApi } from "../../utils/api/index";
-import axios from "axios";
+
 
 const Actions = {
   setUserData: data => ({
@@ -10,14 +10,18 @@ const Actions = {
     type: 'USER:SET_IS_AUTH',
     payload: bool,
   }),
+
   fetchUserData: () => dispatch => {
     userApi
       .getMe()
       .then(( data ) => {
         console.log(data)
         dispatch(Actions.setUserData(data));
+      }).then((res)=>{
+        console.log(res)
       })
       .catch(err => {
+        console.log(err)
         if (err.response.status === 403) {
           dispatch(Actions.setIsAuth(false));
           delete window.localStorage.token;
@@ -28,14 +32,17 @@ const Actions = {
     return userApi
       .signIn(postData)
       .then(({ data }) => {
+        console.log(data)
         const { token } = data;
         // openNotification({
         //   title: 'tittle of notification'',
         //   text: 'your login in sucess fully...',
         //   type: 'success',
         // });
-        axios.defaults.headers.common['token'] = token;
-        localStorage['token'] = token;
+
+        window.axios.defaults.headers.common['token'] = token;
+        window.localStorage['token'] = token;
+        window.axios.defaults.headers.common["Authorization"] = token;
         dispatch(Actions.fetchUserData());
         dispatch(Actions.setIsAuth(true));
         return data;

@@ -25,18 +25,20 @@ const Login = (props) => {
     console.log(user)
     store
     .dispatch(Actions.fetchUserLogin(user))
-    .then(( {success} ) => {
+    .then(({success}) => {
       if (success) {
-        props.history.push('/');
+        props.history.push('/dashboard');
       }
       console.log(success)
-
     })
     .catch(() => {
       // setSubmitting(false);
       console.log('------------Somthing Going Worng there ----- ')
     });
   }
+
+
+
 
   return (
     <div className="bg-default">

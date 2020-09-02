@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import { userApi } from "../utils/api/index";
@@ -18,7 +16,6 @@ const EditProfile = () => {
   const onChangeEvent = () => {} 
 
   useEffect(()=>{
-    console.log('hello ..............................')
     userApi.getMe().then(res=>{
       console.log(res)
     })

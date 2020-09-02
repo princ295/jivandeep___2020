@@ -11,4 +11,5 @@ export { default as Navbar } from "./Navbar";
 export { default as Sidebar} from "./Sidebar";
 export { default as  Profile} from "./Profile";
 
+export { default as Dashboardlayout} from './Dashboardlayout';
 export { default as Hello} from "./Hello";

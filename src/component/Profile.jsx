@@ -1,21 +1,7 @@
 import React, { useState} from 'react';
 import { useEffect } from 'react';
 
-
-// "user": "jivandeep@test.com",
-// "image": "http://jivandeepapi.pythonanywhere.com/media/media/profile_pics/Screenshot_381.png",
-// "firstname": "raja",
-// "lastname": "mandal",
-// "bloodGroup": "O+",
-// "gender": "Male",
-// "dateOfBirth": "1996-09-28",
-// "mobileNumber": "07987298352",
-// "alternateMobileNumber": "8602201700",
-// "address": "transport nagar, T.P nagar korba chhattishgarh",
-// "state": "Chhattisgarh",
-// "pincode": "495677",
-// "country": "India",
-// "professionalStatus": "Government Employee"
+import { useDispatch, useSelector } from "react-redux";
 
 
 const Profile = () => {
@@ -26,14 +12,17 @@ const Profile = () => {
   }
 
   const [info, setInfo] = useState(initialState)
+  const { user } = useSelector((user)=>user)
+
 
 
   useEffect(()=>{
-
+    loadUserinfo()
   },[])
 
-
-
+  function loadUserinfo(){
+    const { data } = user.data
+  }
   //Submit buttom
   const onSubmit = () => {}
 
