@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Header, Home, Hello, Profile, Dashboardlayout} from "../component/index";
+import { Header, Home, Hello, Profile, Dashboardlayout, EditProfile, ProfileInfo} from "../component/index";
 import { NavLink, Switch ,Route, Link } from 'react-router-dom';
 
 import { userApi } from "../utils/api/index";
@@ -24,8 +24,7 @@ const Dashboard = ({match}) => {
         <Link to={`${match.path}/profile`}>Profie</Link> */}  
 
         <Switch>
-          <Route path={`${match.path}/hello`} component={Hello}/>
-          <Route path={`${match.path}/profile`} component={Profile}/>
+          <Route path={`${match.path}/profile`} component={ProfileInfo}/>
           <Route path={`${match.path}/`} component={Dashboardlayout}/>
         </Switch>
 

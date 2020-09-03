@@ -14,8 +14,6 @@ const Profile = () => {
   const [info, setInfo] = useState(initialState)
   const { user } = useSelector((user)=>user)
 
-
-
   useEffect(()=>{
     loadUserinfo()
   },[])
