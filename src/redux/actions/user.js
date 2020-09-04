@@ -28,21 +28,19 @@ const Actions = {
         }
       });
   },
-  fetchUpdateData: putdata => {
+  fetchUpdateData: putdata => dispatch=>{
     return userApi
       .updateProfile(putdata)
-      .then(( data ) => {
+      .then((data) => {
         console.log(data)
-        // dispatch(Actions.setUserData(data));
-      }).then((res)=>{
-        console.log(res)
+        return data
       })
-      .catch(err => {
-        console.log(err)
-        // if (err.response.status === 403) {
-        //   dispatch(Actions.setIsAuth(false));
-        //   delete window.localStorage.token;
-        // }
+      .catch(({ response }) => {
+        // openNotification({
+        //   title: 'tittle of notification',
+        //   text: 'your login fail...',
+        //   type: 'error',
+        // });
       });
   },
   fetchUserLogin: postData => dispatch => {

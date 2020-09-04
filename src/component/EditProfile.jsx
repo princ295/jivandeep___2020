@@ -7,7 +7,7 @@ import store from '../redux/store';
 import Actions from '../redux/actions/user';
 
 
-const EditProfile = ({loggedUserInfo}) => {
+const EditProfile = ({loggedUserInfo, match}) => {
 
   const [userInfo, SetUserInfo] = useState(loggedUserInfo)
 
@@ -16,20 +16,18 @@ const EditProfile = ({loggedUserInfo}) => {
   } 
 
   const onSubmit = (e) => {
-
+    e.preventDefault();
     store
-    .dispatch(Actions.fetchUpdateDtat(userInfo))
-    .then(({success}) => {
-      if (success) {
-        console.log(success)
-      }
-      console.log(success)
+    .dispatch(Actions.fetchUpdateData(userInfo))
+    .then(({status}) => {
+      store
+        .dispatch(Actions.fetchUserData())
+        alert('your profile update sucessfully..........')
     })
     .catch(() => {
       // setSubmitting(false);
       console.log('------------Somthing Going Worng there ----- ')
     });
-    e.preventDefault();
   }
 
   return (
