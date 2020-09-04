@@ -10,9 +10,9 @@ export { default as Navbar } from "./Navbar";
 
 export { default as Sidebar} from "./Sidebar";
 export { default as  Profile} from "./Profile";
-
 export { default as Dashboardlayout} from './Dashboardlayout';
 
+export { default as Loading } from "./Loading";
 
 export { default as ProfileInfo } from './ProfileInfo';
 

@@ -2,27 +2,35 @@ import React, { useState} from 'react';
 import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from "react-redux";
-
+//redux
+import store from "../redux/reducers";
 
 const Profile = () => {
 
-  const initialState = {
-    user: '', image: '', firstname: '', lastname: '', bloodGroup: '', gender: '', dateOfBirth: '', mobileNumber: '', alternateMobileNumber: '',
-    address: '', state: '', pincode: '', country: '', professionalStatus: ''
-  }
 
-  const [info, setInfo] = useState(initialState)
+  const uploaderimge = '';
+  const [info, setInfo] = useState({
+    user: '', image: '', firstname: '', lastname: '', bloodGroup: '', gender: '', dateOfBirth: '', 
+    mobileNumber: '', alternateMobileNumber: '', profileImage: '',
+    address: '', state: '', pincode: '', country: '', professionalStatus: ''
+  })
   const { user } = useSelector((user)=>user)
 
-  useEffect(()=>{
-    loadUserinfo()
-  },[])
-
-  function loadUserinfo(){
-    // const { data } = user.data
+  function onChangeEvent(e){
+    console.log('chage event going on........')
+    if(e.target.name!='profileImage'){
+      setInfo({...user,[e.target.name]: e.target.value})
+    }else{
+      setInfo({...info,[e.target.name]: e.target.value});
+    }
   }
+
   //Submit buttom
-  const onSubmit = () => {}
+  const onSubmit = (e) => {
+    e.preventDefault();
+    //post request for api call to create profile
+
+  }
 
   return (
   <div>
@@ -85,19 +93,19 @@ const Profile = () => {
                         <div className="col-lg-4">
                           <div className="form-group">
                             <label className="form-control-label" htmlFor="input-username">First name</label>
-                            <input type="text" id="firstname"  className="form-control" placeholder="Username" defaultValue="lucky.jesse" />
+                            <input type="text" id="firstname" name="firstname" onChange={onChangeEvent} className="form-control" placeholder="Username" defaultValue="lucky.jesse" />
                           </div>
                         </div>
                         <div className="col-lg-4">
                           <div className="form-group">
                             <label className="form-control-label" htmlFor="input-email">Last name</label>
-                            <input type="text" id="lastname" name="lastname" className="form-control" placeholder="jesse@example.com" />
+                            <input type="text" id="lastname" name="lastname" onChange={onChangeEvent} className="form-control" placeholder="jesse@example.com" />
                           </div>
                         </div>
                         <div className="col-lg-4">
                           <div className="form-group">
                             <label className="form-control-label" htmlFor="input-first-name">Gender</label>
-                              <select className="form-control" id="gender" name="gender">
+                              <select className="form-control" id="gender" name="gender" onChange={e => onChangeEvent(e)}>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Third gender">Third gender</option>
@@ -111,7 +119,7 @@ const Profile = () => {
                             <div className="col-lg-4">
                               <div className="form-group">
                                 <label className="form-control-label" htmlFor="input-last-name">Blood Group</label>
-                                <select className="form-control" id="bloodGroup" name="bloodGroup" >
+                                <select className="form-control" id="bloodGroup" name="bloodGroup" onChange={e => onChangeEvent(e)}>
                                   <option value="A+">A +ve</option>
                                   <option value="A-">A -ve</option>
                                   <option value="B+">B +ve</option>
@@ -123,18 +131,19 @@ const Profile = () => {
                                 </select>
                               </div>
                             </div>
+                            
 
                             <div className="col-lg-4">
                               <div className="form-group">
                                 <label className="form-control-label" htmlFor="input-last-name">Date Of Birth</label>
-                                <input type="date" id="dateOfBirth" name="dateOfBirth" className="form-control" placeholder="Last name" defaultValue="Jesse"/>
+                                <input type="date" id="dateOfBirth" name="dateOfBirth" className="form-control" placeholder="Last name" defaultValue="Jesse" onChange={e => onChangeEvent(e)} />
                               </div>
                             </div>
 
                             <div className="col-lg-4">
                               <div className="form-group">
                                 <label className="form-control-label" htmlFor="input-last-name">Professional Status</label>
-                                  <select class="form-control" id="professionalStatus" name="professionalStatus">
+                                <select class="form-control" id="professionalStatus" name="professionalStatus" onChange={e => onChangeEvent(e)}>
                                     <option value="Government Employee">Government Employee</option>
                                     <option value="Private Employee">Private Employee</option>
                                     <option value="Business">Business</option>
@@ -152,13 +161,13 @@ const Profile = () => {
                         <div className="col-lg-6">
                           <div className="form-group">
                             <label className="form-control-label" htmlFor="input-country">Mobile Number</label>
-                            <input type="number" id="mobileNumber" name="mobileNumber" className="form-control" placeholder="Postal code"/>
+                            <input type="number" id="mobileNumber" name="mobileNumber" className="form-control"  name="professionalStatus" onChange={e => onChangeEvent(e)} placeholder="Postal code"/>
                           </div>
                         </div>
                         <div className="col-lg-6">
                           <div className="form-group">
                             <label className="form-control-label" htmlFor="input-country">Alternate Number</label>
-                            <input type="number" id="alternateNumber" name="alternateNumber" className="form-control" placeholder="Postal code"/>
+                            <input type="number" id="alternateNumber" name="alternateNumber" className="form-control" onChange={e => onChangeEvent(e)} placeholder="Postal code"/>
                           </div>
                         </div>
                       </div>
@@ -172,15 +181,15 @@ const Profile = () => {
                         <div className="col-md-12">
                           <div className="form-group">
                             <label className="form-control-label" htmlFor="input-address">Address</label>
-                            <input id="address" name="address" className="form-control" placeholder="Home Address" defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text" />
+                            <input id="address" name="address" className="form-control" onChange={e => onChangeEvent(e)} placeholder="Home Address"  type="text" />
                           </div>
                         </div>
                       </div>
-                      <div className="row">
+                      <div className="row"> 
                         <div className="col-lg-4">
                           <div className="form-group">
                             <label className="form-control-label" htmlFor="input-city">State</label>
-                            <select class="form-control form-control-alternative" name="state" id="state" >
+                              <select class="form-control form-control-alternative" name="state" id="state" onChange={e => onChangeEvent(e)}>
                                 <option class="form-control form-control-alternative" >Select State</option>
                                 <option class="form-control form-control-alternative" value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                 <option class="form-control form-control-alternative" value="Andhra Pradesh">Andhra Pradesh</option>
@@ -223,13 +232,13 @@ const Profile = () => {
                         <div className="col-lg-4">
                           <div className="form-group">
                             <label className="form-control-label" htmlFor="input-country">Pincode</label>
-                            <input type="number" id="pincode" name="pincode" className="form-control" placeholder="Country" defaultValue="United States" />
+                            <input type="number" id="pincode" onChange={onChangeEvent} name="pincode" className="form-control" placeholder="Country" defaultValue="United States" />
                           </div>
                         </div>
                         <div className="col-lg-4">
                           <div className="form-group">
                             <label className="form-control-label" htmlFor="input-country">Country</label>
-                            <select class="form-control form-control-alternative" id="country" name="country">
+                            <select class="form-control form-control-alternative" id="country" name="country" onChange={onChangeEvent}>
                                 <option class="form-control form-control-alternative" >Select Country</option>
                                 <option class="form-control form-control-alternative" value="India" >India</option>
                             </select>
@@ -241,7 +250,7 @@ const Profile = () => {
                     <div className="pl-lg-4">
                       <div className="form-group">
                         <label className="form-control-label">Profile picture</label>
-                        <input type="file" class="form-control-file" name="file" id="profileImage" name="profileImage" accept="image/x-png,image/gif,image/jpeg" />
+                        <input type="file" class="form-control-file" name="file" id="profileImage" onChange={onChangeEvent} name="profileImage" accept="image/x-png,image/gif,image/jpeg" />
                         {/* <textarea rows={4} className="form-control" placeholder="A few words about you ..." defaultValue={"A beautiful Dashboard for Bootstrap 4. It is Free and Open Source."} /> */}
                       </div>
                     </div>

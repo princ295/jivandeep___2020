@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Header, Home, Hello, Profile, Dashboardlayout, EditProfile, ProfileInfo} from "../component/index";
+import { Loading, Header, Home, Hello, Profile, Dashboardlayout, EditProfile, ProfileInfo} from "../component/index";
 import { NavLink, Switch ,Route, Link } from 'react-router-dom';
 
 import { userApi } from "../utils/api/index";
@@ -18,10 +18,11 @@ const Dashboard = ({match}) => {
       <div className="main-content" id="panel">
         {/* Topnav */}
         <Home/>
-      
+        <Loading />
         {/* <Link to={`${match.path}/`}>Profie</Link>
         <Link to={`${match.path}/hello`}>Hello</Link>
-        <Link to={`${match.path}/profile`}>Profie</Link> */}  
+        <Link to={`${match.path}/profile`}>Profie</Link> */} 
+
 
         <Switch>
           <Route path={`${match.path}/create`} component={Profile}/>
@@ -34,11 +35,6 @@ const Dashboard = ({match}) => {
       </div>
     </div>
   );
-
-
-
-  
-  
 }
 
 export default Dashboard;

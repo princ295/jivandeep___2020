@@ -1,6 +1,5 @@
 import { userApi } from "../../utils/api/index";
 
-
 const Actions = {
   setUserData: data => ({
     type: 'USER:SET_DATA',

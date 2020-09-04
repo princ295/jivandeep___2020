@@ -10,7 +10,7 @@ import Actions from '../redux/actions/user';
 const EditProfile = ({loggedUserInfo, match}) => {
 
   const [userInfo, SetUserInfo] = useState(loggedUserInfo)
-
+  
   const onChangeEvent = (e) => {
     SetUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   } 
