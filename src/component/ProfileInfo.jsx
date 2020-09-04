@@ -10,7 +10,6 @@ const ProfileInfo = () => {
   
   const { firstname, lastname, bloodGroup, gender, dateOfBirth, mobileNumber, alternateNumber, address, state, pincode, country, professionalStatus, profileImage} = data.data;
 
-
   useEffect(()=>{
     loadUser()
   },[])
@@ -85,7 +84,7 @@ const ProfileInfo = () => {
                                   </button>
                                 </div>
                                 <div className="modal-body">
-                                  <EditProfile/>
+                                  <EditProfile loggedUserInfo={data.data}/>
                                 </div>
                                 <div className="modal-footer">
                                   <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

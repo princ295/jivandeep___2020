@@ -1,26 +1,36 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
+
 
 import { userApi } from "../utils/api/index";
 
+import store from '../redux/store';
+import Actions from '../redux/actions/user';
 
 
-const EditProfile = () => {
+const EditProfile = ({loggedUserInfo}) => {
 
-  const initialState = {
-    country: '', gender: '', professionalStatus: '', mobileNumber: '', alternateNumber: '', address: '', pincode: '', profileImage: ''
-  }
+  const [userInfo, SetUserInfo] = useState(loggedUserInfo)
 
-  const userInfo = useState(initialState)
+  const onChangeEvent = (e) => {
+    SetUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  } 
 
-  const onChangeEvent = () => {} 
+  const onSubmit = (e) => {
 
-  useEffect(()=>{
-    userApi.getMe().then(res=>{
-      console.log(res)
+    store
+    .dispatch(Actions.fetchUpdateDtat(userInfo))
+    .then(({success}) => {
+      if (success) {
+        console.log(success)
+      }
+      console.log(success)
     })
-  })
-
+    .catch(() => {
+      // setSubmitting(false);
+      console.log('------------Somthing Going Worng there ----- ')
+    });
+    e.preventDefault();
+  }
 
   return (
     <div className="w-100 mx-auto  p-10">  
@@ -34,6 +44,9 @@ const EditProfile = () => {
                       type="text"
                       className="form-control"
                       placeholder="First Name"
+                      name="firstname"
+                      value={userInfo.firstname}
+                      onChange={e => onChangeEvent(e)}
                     />
                 </div>
              </div>
@@ -44,6 +57,8 @@ const EditProfile = () => {
                     className="form-control"
                     placeholder="Last Name"
                     name="lastname"
+                    value={userInfo.lastname} 
+                    onChange={e => onChangeEvent(e)}
                   />
               </div>
              </div>
@@ -214,7 +229,7 @@ const EditProfile = () => {
           </div>
           {/* --------------End 6th row ---------*/}
           
-          <button className="btn btn-primary btn-block">Update User</button>
+          <button onClick={onSubmit} className="btn btn-primary btn-block">Update User</button>
         </form>
       </div>
   );

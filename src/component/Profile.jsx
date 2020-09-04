@@ -19,7 +19,7 @@ const Profile = () => {
   },[])
 
   function loadUserinfo(){
-    const { data } = user.data
+    // const { data } = user.data
   }
   //Submit buttom
   const onSubmit = () => {}
@@ -73,7 +73,7 @@ const Profile = () => {
                 <div className="card-header">
                   <div className="row align-items-center">
                     <div className="col-8">
-                      <h3 className="mb-0">Profile Details </h3>
+                      <h3 className="mb-0">Create Your Profile Details </h3>
                     </div>
                   </div>
                 </div>

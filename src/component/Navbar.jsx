@@ -30,6 +30,11 @@ const Navbar = () => {
             </div>
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
+                <Link to="/dashboard/create" className="nav-link">
+                  <span className="nav-link-inner--text">Create___profile</span>
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link to="/editprofile" className="nav-link">
                   <span className="nav-link-inner--text">Edit___profile</span>
                 </Link>

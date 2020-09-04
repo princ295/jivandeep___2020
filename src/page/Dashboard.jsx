@@ -24,6 +24,7 @@ const Dashboard = ({match}) => {
         <Link to={`${match.path}/profile`}>Profie</Link> */}  
 
         <Switch>
+          <Route path={`${match.path}/create`} component={Profile}/>
           <Route path={`${match.path}/profile`} component={ProfileInfo}/>
           <Route path={`${match.path}/`} component={Dashboardlayout}/>
         </Switch>

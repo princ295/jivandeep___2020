@@ -15,8 +15,6 @@ import { EditProfile, Profile, ProfileInfo} from "./component/index";
 //edit profile : is for update account
 //profileinfo : is for to see data which is insterd at time of creation and update also
 
-
-
 function App (props){
   return (
     <Provider store={store}> 

@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Forgotpwd } from "../component/index";
 
-
 //redux
 import store from '../redux/store';
 import Actions from '../redux/actions/user';
@@ -36,9 +35,6 @@ const Login = (props) => {
       console.log('------------Somthing Going Worng there ----- ')
     });
   }
-
-
-
 
   return (
     <div className="bg-default">
