@@ -4,12 +4,19 @@ import { Loading, Header, Home, Hello, Profile, Dashboardlayout, EditProfile, Pr
 import { NavLink, Switch ,Route, Link } from 'react-router-dom';
 
 import { userApi } from "../utils/api/index";
+import { useEffect } from "react";
 
 const Dashboard = ({match}) => {
 
   const getMe = () => {
     userApi.getMe()
   }
+
+  useEffect(()=>{
+   const __ = unescape(atob((localStorage.getItem('logged_'))))
+
+    console.log(JSON.parse(__))
+  },[])
 
   return (
     <div>
@@ -18,7 +25,6 @@ const Dashboard = ({match}) => {
       <div className="main-content" id="panel">
         {/* Topnav */}
         <Home/>
-        <Loading />
         {/* <Link to={`${match.path}/`}>Profie</Link>
         <Link to={`${match.path}/hello`}>Hello</Link>
         <Link to={`${match.path}/profile`}>Profie</Link> */} 

@@ -14,7 +14,10 @@ const Actions = {
     userApi
       .getMe()
       .then(( data ) => {
-        console.log(data)
+        console.log(data.data)
+        console.log('---------===========--------')
+        const enc = btoa(escape(JSON.stringify(data.data)))
+        localStorage.setItem('logged_',enc)
         dispatch(Actions.setUserData(data));
       }).then((res)=>{
         console.log(res)
