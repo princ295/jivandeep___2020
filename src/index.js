@@ -4,10 +4,14 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+
 import { BrowserRouter } from "react-router-dom";
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+      <ReactNotification />
+      <App />
     </BrowserRouter>,
     document.getElementById('root'));
 registerServiceWorker();

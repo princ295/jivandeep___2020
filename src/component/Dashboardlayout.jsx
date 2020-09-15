@@ -70,7 +70,7 @@ const Dashboardlayout = () => {
                                 {/* Card body */}
                                 <div id="collapseOne1" className="collapse show" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
                                   <div className="card-body">
-                                  <NavLink to="/KidneyTransplat"> Kidney Transplant</NavLink><br/><br/>
+                                  <NavLink to="/dashboard/transplant"> Kidney Transplant</NavLink><br/><br/>
                                     Post Transplant Case<br/><br/>
                                     Personalised Case
                                   </div>

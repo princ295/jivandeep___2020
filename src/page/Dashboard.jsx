@@ -1,10 +1,11 @@
 import React from "react";
 
-import { Loading, Header, Home, Hello, Profile, Dashboardlayout, EditProfile, ProfileInfo} from "../component/index";
+import { Loading, Header, Home, Hello, Profile, Dashboardlayout, EditProfile, ProfileInfo, Transplant} from "../component/index";
 import { NavLink, Switch ,Route, Link } from 'react-router-dom';
 
 import { userApi } from "../utils/api/index";
 import { useEffect } from "react";
+import Family from "../component/Family";
 
 const Dashboard = ({match}) => {
 
@@ -31,6 +32,8 @@ const Dashboard = ({match}) => {
 
 
         <Switch>
+          <Route path={`${match.path}/transplant`} component={Transplant} />
+          <Route path={`${match.path}/family`} component={Family}/>
           <Route path={`${match.path}/create`} component={Profile}/>
           <Route path={`${match.path}/profile`} component={ProfileInfo}/>
           <Route path={`${match.path}/`} component={Dashboardlayout}/>

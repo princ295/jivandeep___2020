@@ -8,7 +8,9 @@ const ProfileInfo = () => {
   const { user } = useSelector((user) => user)
   let { data } = user
 
-  data = data ? data : unescape(atob((localStorage.getItem('logged_')))) 
+  data = data ? data :JSON.parse(unescape(atob((localStorage.getItem('logged_')))) )
+
+  console.log(data)
 
   const { firstname, lastname, bloodGroup, gender, dateOfBirth, mobileNumber, alternateNumber, address, state, pincode, country, professionalStatus, profileImage } = data;
 
@@ -23,7 +25,7 @@ const ProfileInfo = () => {
   }
 
   return (
-    <div>
+    <div style={{height: '100vh', overflow: 'overlay'}}>
       <div className="main-content" id="panel">
 
         <div className="header pb-6 d-flex align-items-center" style={{ minHeight: '500px', backgroundImage: 'url(../assets/img/theme/profile-cover.jpg)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
@@ -88,7 +90,7 @@ const ProfileInfo = () => {
                               </button>
                             </div>
                             <div className="modal-body">
-                              <EditProfile loggedUserInfo={data.data} />
+                              <EditProfile loggedUserInfo={data} />
                             </div>
                             <div className="modal-footer">
                               <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

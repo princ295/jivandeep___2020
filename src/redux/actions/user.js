@@ -1,5 +1,7 @@
 import { userApi } from "../../utils/api/index";
 
+import { store } from 'react-notifications-component';
+
 const Actions = {
   setUserData: data => ({
     type: 'USER:SET_DATA',
@@ -17,6 +19,7 @@ const Actions = {
         console.log(data.data)
         console.log('---------===========--------')
         const enc = btoa(escape(JSON.stringify(data.data)))
+
         localStorage.setItem('logged_',enc)
         dispatch(Actions.setUserData(data));
       }).then((res)=>{
@@ -51,11 +54,20 @@ const Actions = {
       .then(({ data }) => {
         console.log(data)
         const { token } = data;
-        // openNotification({
-        //   title: 'tittle of notification'',
-        //   text: 'your login in sucess fully...',
-        //   type: 'success',
-        // });
+
+        store.addNotification({
+          title: "Login Sucessfully..!",
+          message: "your login sucessfully",
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true
+          }
+        });
 
         window.axios.defaults.headers.common['token'] = token;
         window.localStorage['token'] = token;
@@ -65,11 +77,21 @@ const Actions = {
         return data;
       })
       .catch(({ response }) => {
-        // openNotification({
-        //   title: 'tittle of notification',
-        //   text: 'your login fail...',
-        //   type: 'error',
-        // });
+
+        store.addNotification({
+          title: "Login Fail!",
+          message: "login fail please check Eamil & Password and try once again",
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true
+          }
+        });
+
       });
   },
   fetchUserRegister: postData => () => {
