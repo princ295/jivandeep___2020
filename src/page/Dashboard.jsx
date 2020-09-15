@@ -6,6 +6,7 @@ import { NavLink, Switch ,Route, Link } from 'react-router-dom';
 import { userApi } from "../utils/api/index";
 import { useEffect } from "react";
 import Family from "../component/Family";
+import Form from "../froms/Form";
 
 const Dashboard = ({match}) => {
 
@@ -15,8 +16,6 @@ const Dashboard = ({match}) => {
 
   useEffect(()=>{
    const __ = unescape(atob((localStorage.getItem('logged_'))))
-
-    console.log(JSON.parse(__))
   },[])
 
   return (
@@ -30,10 +29,9 @@ const Dashboard = ({match}) => {
         <Link to={`${match.path}/hello`}>Hello</Link>
         <Link to={`${match.path}/profile`}>Profie</Link> */} 
 
-
         <Switch>
           <Route path={`${match.path}/transplant`} component={Transplant} />
-          <Route path={`${match.path}/family`} component={Family}/>
+          <Route path={`${match.path}/family`} component={Form}/>
           <Route path={`${match.path}/create`} component={Profile}/>
           <Route path={`${match.path}/profile`} component={ProfileInfo}/>
           <Route path={`${match.path}/`} component={Dashboardlayout}/>

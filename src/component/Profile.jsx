@@ -17,7 +17,6 @@ const Profile = () => {
   const { user } = useSelector((user)=>user)
 
   function onChangeEvent(e){
-    console.log('chage event going on........')
     if(e.target.name!='profileImage'){
       setInfo({...user,[e.target.name]: e.target.value})
     }else{
