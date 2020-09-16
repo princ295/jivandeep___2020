@@ -7,6 +7,7 @@ import { userApi } from "../utils/api/index";
 import { useEffect } from "react";
 import Family from "../component/Family";
 import Form from "../froms/Form";
+import Dumy from "../component/Dumy";
 
 const Dashboard = ({match}) => {
 
@@ -31,7 +32,7 @@ const Dashboard = ({match}) => {
 
         <Switch>
           <Route path={`${match.path}/transplant`} component={Transplant} />
-          <Route path={`${match.path}/family`} component={Form}/>
+          <Route path={`${match.path}/family`} component={Dumy}/>
           <Route path={`${match.path}/create`} component={Profile}/>
           <Route path={`${match.path}/profile`} component={ProfileInfo}/>
           <Route path={`${match.path}/`} component={Dashboardlayout}/>
