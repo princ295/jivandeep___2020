@@ -1,13 +1,14 @@
 
-import { imageApi } from "./../../utils/api/imageUploader";
+import { imageApi } from "./../../utils/api/";
 
 
 const UploaderAction = {
-  UploadData: () => dispatch => {
+   UploadData: (postdata) => {
     console.log('image api method calling........')
-    imageApi
-      .uploadImage().then(res=>{
-          console.log(res)
+    return imageApi
+      .uploadImage(postdata).then(res=>{
+        console.log(res)
+        return res
       })
   }
 }

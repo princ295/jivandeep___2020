@@ -4,55 +4,121 @@ import { Field, reduxForm } from 'redux-form';
 
 
 import { Button } from 'reactstrap';
+import store from './../redux/store';
+import { UploaderAction } from "./../redux/actions/";
+import { useSelector, useDispatch } from 'react-redux';
+
+
+//TODO TasK
+//add dynemic form _ done 
+//generate link for an image _done 
+//bind all data in global state _done
+
+
+
 
 
 const SectionOne  = (props) => {
+
+  const info = useSelector(res => res.Steperform)
+  const dispatch = useDispatch()
+  console.log(info)
+
+
   const { handleSubmit } = props;
 
+  const [fields, setFields] = useState([{ value: null }]);
+  const [idImage, setIdImage] = useState({ idProofImage: null })
+  const [idnumber, setIdNumber] = useState({
+    idNumber:''
+  })
 
-  const [inputList, setInputList] = useState([{file: ''}]);
+
+  function handleChange(i, event) {
+    const values = [...fields];
+    values[i].value = event.target.value;
+    setFields(values);
+  }
+
+  function handleAdd() {
+    const values = [...fields];
+    values.push({ value: null });
+    setFields(values);
+  }
+
+  function handleRemove(i) {
+    if(fields.length!=1){
+      const values = [...fields];
+      values.splice(i, 1);
+      setFields(values);
+      dispatch({
+        type: "Medical_DOC_Remove",
+        payload: i
+      })
+      console.log(fields)
+    }
+  }
 
 
-  
-  // handle input change
-  const handleInputChange = (e, index) => {
-    const { name, value } = e.target;
-    const list = [...inputList];
-    list[index][name] = value;
-    setInputList(list);
-  };
- 
-  // handle click event of the Remove button
-  const handleRemoveClick = index => {
+  const onChangeEvent = (index,e) => {
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset','JivandeepImages')
+
+      UploaderAction
+        .UploadData(data)
+          .then(res=>{
+            console.log(res)
+            //mapping url
+            fields[index].value = res.config.url
+            let fileInfo = res.config.url
+            setFields(fields)
+            dispatch({
+              type: "Medical_DOC",
+              payload: {
+                fileInfo
+              }
+            })
+            console.log(fields)
+          }).catch(err=>console.log('somthing going to work.....'))
+  }
+
+
+  const onUploadIdentity = (e) => {
     
-    if(index!= inputList.length-1){
-      
-      let du_array= [...inputList]
-      console.log(du_array)
-       console.log( du_array.splice(index, 1))
-      
-       console.log(du_array.length)
-       console.log(inputList)
-       setInputList(du_array)
-       console.log(inputList)
-       console.log('done..........')
-    }
-    else{
-      const list = [...inputList];
-      list.splice(index, 1);
-      setInputList(list);
-      console.log('else block ............')
-    }
-  };
- 
-  // handle click event of the Add button
-  const handleAddClick = () => {
-    setInputList([...inputList, {file:''}]);
-  };
- 
+    const files = e.target.files
+    const data = new FormData()
+
+    data.append('file',files[0])
+    data.append('upload_preset','JivandeepImages')
+    UploaderAction
+    .UploadData(data)
+      .then(res=>{
+        console.log(res)
+     //mapping url
+     idImage.idProofImage = res.config.url
+     dispatch({
+       type: "ID_Proof",
+       payload: res.config.url
+     })
+     setIdImage(idImage)
+     console.log(idImage)
+      }).catch(err=>console.log('somthing going to work.....'))
+  }
 
 
-  const onChangeEvent = () => {}
+  const onChangeText = (e) => {
+    setIdNumber({ ...idnumber, [e.target.name]: e.target.value });
+    dispatch({
+      type: "ID_Number",
+      payload: e.target.value 
+    })
+    console.log(info)
+    console.log(idnumber)
+  }
+
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -68,7 +134,9 @@ const SectionOne  = (props) => {
             <input
               type="text"
               placeholder="Card Number"
+              name="idNumber"
               className="form-control shadow-none"
+              onChange={onChangeText}
             />
           </div>
           <div className="col-md-2">
@@ -78,42 +146,10 @@ const SectionOne  = (props) => {
             <input
               type="file"
               className="form-control shadow-none"
-              onChange={e => onChangeEvent(e)}
+
+              onChange={e=>onUploadIdentity(e)}
             />
           </div>
-
-
-
-          {inputList.map((x, i) => {
-      return (
-        <div className="box">
-          <input
-            name="firstName"
- placeholder="Enter First Name"
-            value={x.firstName}
-            onChange={e => handleInputChange(e, i)}
-          />
-          <input
-            className="ml10"
-            name="lastName"
- placeholder="Enter Last Name"
-            value={x.lastName}
-            onChange={e => handleInputChange(e, i)}
-          />
-
-          <div className="btn-box">
-            {inputList.length !== 1 && <button
-              className="mr10"
-              onClick={() => handleRemoveClick(i)}>Remove</button>}
-            {inputList.length - 1 === i && <button onClick={handleAddClick}>Add</button>}
-          </div>
-        </div>
-      );
-    })}
-
-
-
-
 
 
           <div className="col-sm-1" style={{ paddingTop: 18 }}>
@@ -133,31 +169,52 @@ const SectionOne  = (props) => {
           </h6>
           <div className="col-md-12">
             <div className="dynamic-wrap">
+              <div>
+                <button
+                  className="btn btn-success btn-sm btn-add"
+                  type="button"
+                  >
+                  <span className="glyphicon glyphicon-plus" onClick={() => handleAdd()}>
+                    Add +
+                  </span>
+                </button>
+              </div>
               <form role="form" autoComplete="off">
-                            <div className="entry input-group">
-                              <input
-                                className="form-control"
-                                name="fields[]"
-                                type="file"
-                                placeholder="Type something"
-                                onChange={e => onChangeEvent(e)}
-                              />
-                              &nbsp;
-                              <span
-                                className="input-group-btn"
-                                style={{ paddingTop: "6px" }}
-                              >
-                                <button
-                                  className="btn btn-success btn-sm btn-add"
-                                  type="button"
-                                >
-                                  <span className="glyphicon glyphicon-plus">
-                                    Add
-                                  </span>
-                                </button>
-                              </span>
-                            </div>
-                          </form>
+              
+                {fields.map((field, idx) => {
+                  return (
+                    <div key={`${field}-${idx}`}>
+                        
+                     <div className="entry input-group">
+
+                      <input
+                        className="form-control"
+                        name="fields"
+                        type="file"
+                        placeholder="Type something"
+                        data-index={idx}
+                        onChange={e => onChangeEvent(idx,e)}
+                      />
+                      &nbsp;
+                      <span
+                        className="input-group-btn"
+                        style={{ paddingTop: "6px" }}
+                      >
+                        <button
+                          className="btn btn-danger btn-sm btn-add"
+                          type="button"
+                        >
+                          <span className="glyphicon glyphicon-plus" onClick={() => handleRemove(idx)}>
+                            Remove
+                          </span>
+                        </button>
+                      </span>
+                      </div>
+                    </div>
+                  );
+                })}
+
+              </form>
               <br />
               {/* <small>Press <span className="glyphicon glyphicon-plus gs" /> to add another form field :)</small> */}
               <small>

@@ -19,9 +19,10 @@ const EditProfile = ({loggedUserInfo, match}) => {
     e.preventDefault();
     store
     .dispatch(Actions.fetchUpdateData(userInfo))
-    .then(({status}) => {
+    .then((status) => {
       store
         .dispatch(Actions.fetchUserData())
+        console.log(status)
         alert('your profile update sucessfully..........')
     })
     .catch(() => {

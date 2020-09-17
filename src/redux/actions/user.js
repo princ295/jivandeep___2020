@@ -40,12 +40,13 @@ const Actions = {
         console.log(data)
         return data
       })
-      .catch(({ response }) => {
+      .catch(( err) => {
         // openNotification({
         //   title: 'tittle of notification',
         //   text: 'your login fail...',
         //   type: 'error',
         // });
+        console.log(err)
       });
   },
   fetchUserLogin: postData => dispatch => {
@@ -91,7 +92,6 @@ const Actions = {
             onScreen: true
           }
         });
-
       });
   },
   fetchUserRegister: postData => () => {

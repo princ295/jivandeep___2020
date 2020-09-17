@@ -8,9 +8,7 @@ const ProfileInfo = () => {
   const { user } = useSelector((user) => user)
   let { data } = user
 
-  data = data ? data :JSON.parse(unescape(atob((localStorage.getItem('logged_')))) )
-
-  console.log(data)
+  data = data ? data.data :JSON.parse(unescape(atob((localStorage.getItem('logged_')))) )
 
   const { firstname, lastname, bloodGroup, gender, dateOfBirth, mobileNumber, alternateNumber, address, state, pincode, country, professionalStatus, profileImage } = data;
 
