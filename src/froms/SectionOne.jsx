@@ -8,23 +8,11 @@ import store from './../redux/store';
 import { UploaderAction } from "./../redux/actions/";
 import { useSelector, useDispatch } from 'react-redux';
 
-
-//TODO TasK
-//add dynemic form _ done 
-//generate link for an image _done 
-//bind all data in global state _done
-
-
-
-
-
 const SectionOne  = (props) => {
 
   const info = useSelector(res => res.Steperform)
   const dispatch = useDispatch()
-  console.log(info)
-
-
+  
   const { handleSubmit } = props;
 
   const [fields, setFields] = useState([{ value: null }]);
@@ -32,7 +20,6 @@ const SectionOne  = (props) => {
   const [idnumber, setIdNumber] = useState({
     idNumber:''
   })
-
 
   function handleChange(i, event) {
     const values = [...fields];
