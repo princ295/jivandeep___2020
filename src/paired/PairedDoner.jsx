@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Stepper from 'react-stepper-horizontal';
@@ -6,7 +7,7 @@ import SectionOne from './SectionOne';
 import SectionTwo from './SectionTwo';
 import SectionThree from './SectionThree';
 
-class Form extends Component {
+class PairedDoner extends Component {
 
   constructor(props) {
     super(props);
@@ -61,8 +62,7 @@ class Form extends Component {
         )}
 
       </Card>
-        <br/><br/>   <br/><br/>
-
+      <br/><br/><br/><br/>
       </div>
       </div>
       </div>
@@ -71,8 +71,8 @@ class Form extends Component {
 
 }
 
-Form.propTypes = {
+PairedDoner.propTypes = {
   onSubmit: PropTypes.func
 };
 
-export default Form;
+export default PairedDoner;

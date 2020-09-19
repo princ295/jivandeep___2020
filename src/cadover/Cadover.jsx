@@ -4,9 +4,9 @@ import Stepper from 'react-stepper-horizontal';
 import { Card } from 'reactstrap';
 import SectionOne from './SectionOne';
 import SectionTwo from './SectionTwo';
-import SectionThree from './SectionThree';
 
-class Form extends Component {
+
+class Cadover extends Component {
 
   constructor(props) {
     super(props);
@@ -15,9 +15,8 @@ class Form extends Component {
     this.state = {
       page: 0,
       steps: [
-        {title: 'Family Form'},
-        {title: 'Donor Profile'},
-        {title: 'Identity Documents of Donor'}
+        {title: 'User Report'},
+        {title: 'Go Policy'},
       ]
     };
   }
@@ -36,7 +35,7 @@ class Form extends Component {
 
     return (
 
-      <div className="row">
+      <div style={{overflowY: 'hidden'}} className="row">
         <div className="col-xl-12">
           {/* Form start */}
 
@@ -53,13 +52,7 @@ class Form extends Component {
             onSubmit={this.nextPage}
           />
         )}
-        {page === 2 && (
-          <SectionThree
-            previousPage={this.previousPage}
-            onSubmit={onSubmit}
-          />
-        )}
-
+        
       </Card>
         <br/><br/>   <br/><br/>
 
@@ -70,9 +63,8 @@ class Form extends Component {
   }
 
 }
-
-Form.propTypes = {
+Cadover.propTypes = {
   onSubmit: PropTypes.func
 };
 
-export default Form;
+export default Cadover;

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-
 import { userApi } from "../utils/api/index";
 
 import store from '../redux/store';
@@ -52,8 +50,8 @@ const EditProfile = ({loggedUserInfo, match}) => {
       .then(res=>{
         profile_image = res.config.url
         console.log(userInfo)
-        
-        SetUserInfo({...userInfo, [name]: res.config.url})
+        console.log(data)
+        SetUserInfo({...userInfo, [name]: res.data.secure_url})
       }).catch(err=>console.log('somthing going to work.....'))
 
       SetUserInfo({ ...userInfo, [name]: profile_image});
@@ -245,15 +243,6 @@ const EditProfile = ({loggedUserInfo, match}) => {
           <div className="row">
             <div className="col-md-12">
               <div className="form-group form-control-alternative">
-                {/* <input
-                  type="file"
-                  className="form-control"
-                  placeholder="Profile Picture"
-                  name="profileImage"
-                  value={userInfo.profileImage}
-                  onChange={e => onChangeEvent(e)}
-                /> */}
-
                 <input
                   type="file"
                   className="form-control"
@@ -261,9 +250,6 @@ const EditProfile = ({loggedUserInfo, match}) => {
                   name="profileImage"
                   onChange={e=>onUploadProfile(e)}
                 />
-
-
-
               </div>
             </div>
           </div>

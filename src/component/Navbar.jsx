@@ -59,6 +59,12 @@ const Navbar = () => {
                   <span className="nav-link-inner--text">Go to Dashboard</span>
                 </Link>
               </li>
+
+              <li className="nav-item">
+                <Link to="/dashboard/cadover" className="nav-link">
+                  <span className="nav-link-inner--text">Cadover Module</span>
+                </Link>
+              </li>
             </ul>
             <hr className="d-lg-none" />
             <ul className="navbar-nav align-items-lg-center ml-lg-auto">

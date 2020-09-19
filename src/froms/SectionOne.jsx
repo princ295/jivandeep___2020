@@ -58,8 +58,8 @@ const SectionOne  = (props) => {
           .then(res=>{
             console.log(res)
             //mapping url
-            fields[index].value = res.config.url
-            let fileInfo = res.config.url
+            fields[index].value = res.data.secure_url
+            let fileInfo = res.data.secure_url
             setFields(fields)
             dispatch({
               type: "Medical_DOC",
@@ -84,10 +84,10 @@ const SectionOne  = (props) => {
       .then(res=>{
         console.log(res)
      //mapping url
-     idImage.idProofImage = res.config.url
+     idImage.idProofImage = res.data.secure_url
      dispatch({
        type: "ID_Proof",
-       payload: res.config.url
+       payload: res.data.secure_url
      })
      setIdImage(idImage)
      console.log(idImage)
