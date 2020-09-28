@@ -1,23 +1,42 @@
 import React from "react";
 
 import { Loading, Header, Home, Hello, Profile, Dashboardlayout, EditProfile, ProfileInfo, Transplant} from "../component/index";
-import { NavLink, Switch ,Route, Link } from 'react-router-dom';
+import { NavLink, Switch ,Route, Link, useHistory } from 'react-router-dom';
 
 import { userApi } from "../utils/api/index";
 import { useEffect } from "react";
-import Family from "../component/Family";
-import Form from "../froms/Form";
 import Dumy from "../component/Dumy";
 import Cadover from "../cadover/Cadover";
 import PairedDoner from "../paired/PairedDoner";
 
+import { Actions } from "../redux/actions/index";
+import store from "../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+
 const Dashboard = ({match}) => {
+   
+  const history = useHistory()
+  const dispatch = useDispatch()
+  const info = useSelector(res=>res.user)
+
+  console.log(info)
 
   const getMe = () => {
     userApi.getMe()
   }
 
   useEffect(()=>{
+    
+      dispatch(Actions.fetchUserData()).then(res=>{
+        if(info.data === null){
+          history.push('/dashboard/create')
+        }
+        
+      }).catch(res=>{
+        console.log(res)
+      })
+       
+
    const __ = unescape(atob((localStorage.getItem('logged_'))))
   },[])
 
