@@ -1,9 +1,16 @@
 import React, { useState , useEffect } from "react";
+import Form from "../froms/Form";
 
-const Dumy = () => {
-  return(
-    <h1>I' m dumy Component</h1>
-  )
-}
+class Dumy extends React.Component {
+  result = (values) => {
+    console.log(values)
+  }
+ render() {
+  return (
+    <Form onSubmit={this.result}/>
+  );
+  }
+ }
+ 
 
 export default Dumy;

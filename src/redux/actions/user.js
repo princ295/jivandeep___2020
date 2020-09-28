@@ -3,6 +3,8 @@ import { userApi } from "../../utils/api/index";
 import { store } from 'react-notifications-component';
 
 const Actions = {
+
+  //dispatch object to update reducer initial state
   setUserData: data => ({
     type: 'USER:SET_DATA',
     payload: data,
@@ -12,8 +14,9 @@ const Actions = {
     payload: bool,
   }),
 
+  //fetch logged user profile data
   fetchUserData: () => dispatch => {
-    userApi
+    return userApi
       .getMe()
       .then(( data ) => {
         console.log(data.data)
@@ -22,9 +25,11 @@ const Actions = {
 
         localStorage.setItem('logged_',enc)
         dispatch(Actions.setUserData(data));
-      }).then((res)=>{
-        console.log(res)
+  
       })
+      // .then((res)=>{
+      //   console.log(res)
+      // })
       .catch(err => {
         console.log(err)
         if (err.response.status === 403) {
@@ -33,21 +38,25 @@ const Actions = {
         }
       });
   },
-  fetchUpdateData: putdata => dispatch=>{
+  //update profile request
+  fetchUpdateData: putdata => () =>{
     return userApi
       .updateProfile(putdata)
       .then((data) => {
         console.log(data)
+        console.log(data)
         return data
       })
-      .catch(({ response }) => {
+      .catch(( err) => {
         // openNotification({
         //   title: 'tittle of notification',
         //   text: 'your login fail...',
         //   type: 'error',
         // });
+        console.log(err)
       });
   },
+  //login request 
   fetchUserLogin: postData => dispatch => {
     return userApi
       .signIn(postData)
@@ -91,12 +100,35 @@ const Actions = {
             onScreen: true
           }
         });
-
       });
   },
+  //register end user using(username, email, password, password2)
   fetchUserRegister: postData => () => {
-    return userApi.signUp(postData);
+    return userApi
+    .signUp(postData)
+      .then(res=>{
+        store.addNotification({
+          title: "Registration Sucessfully..!",
+          message: "your register sucessfully",
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true
+          }
+
+        }); 
+        return res
+      }).catch(res=>console.log(res));
   },
+  //register create new profile 
+  fetchCreteProfile: postData => () =>{
+    //api call
+    return userApi.registerprofile(postData)
+  }
 };
 
 export default Actions;

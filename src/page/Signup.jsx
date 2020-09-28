@@ -1,18 +1,45 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import {PostData} from '../services/PostData';
-import {Redirect} from 'react-router-dom';
+import {Redirect, useHistory} from 'react-router-dom';
 //import './Signup.css';
 import {Link} from 'react-router-dom';
+
+import store from "../redux/store";
+import { Actions } from "../redux/actions/index";
 
 
 import { Navbar } from "../component/index";
 
-  const Signup = () => {
+const Signup = (props) => {
+  
+  const history = useHistory()
+  // fieldsOrKey:name, email , password,password2
+  const [registeration, setRegistration] = useState({
+    email: '',
+    name: '',
+    password: '',
+    password2: ''
+  })
 
-  const onChangeEvent = () => {}
+  const onChangeEvent = (e) => {
 
-  const onSubmit = () => {}
+    console.log(registeration)
+    setRegistration({ ...registeration, [e.target.name]: e.target.value })
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    store
+    .dispatch(Actions.fetchUserRegister(registeration)).then(res=>{
+      console.log(res)
+    }).catch(err=>console.log(err))
+        console.log(registeration)
+    // store.dispatch(
+    //   Actions.fetchUserRegister(registeration)
+       
+    // )
+  }
 
   return (
     <div>

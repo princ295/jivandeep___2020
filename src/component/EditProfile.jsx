@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-
-
 import { userApi } from "../utils/api/index";
 
 import store from '../redux/store';
 import Actions from '../redux/actions/user';
 
+import { UploaderAction } from "./../redux/actions/";
+import { useSelector, useDispatch } from 'react-redux';
+import user from "../utils/api/user";
 
 const EditProfile = ({loggedUserInfo, match}) => {
 
+  let profile_image =''
   const [userInfo, SetUserInfo] = useState(loggedUserInfo)
   
   const onChangeEvent = (e) => {
@@ -19,9 +21,10 @@ const EditProfile = ({loggedUserInfo, match}) => {
     e.preventDefault();
     store
     .dispatch(Actions.fetchUpdateData(userInfo))
-    .then(({status}) => {
+    .then((status) => {
       store
         .dispatch(Actions.fetchUserData())
+        console.log(status)
         alert('your profile update sucessfully..........')
     })
     .catch(() => {
@@ -29,6 +32,32 @@ const EditProfile = ({loggedUserInfo, match}) => {
       console.log('------------Somthing Going Worng there ----- ')
     });
   }
+
+
+  const onUploadProfile = (e) => {
+    
+    let name= e.target.name
+    
+    console.log(e.target.name)
+    const files = e.target.files
+    const data = new FormData()
+
+    data.append('file',files[0])
+    console.log(userInfo)
+    data.append('upload_preset','JivandeepImages')
+    UploaderAction
+    .UploadData(data)
+      .then(res=>{
+        profile_image = res.config.url
+        console.log(userInfo)
+        console.log(data)
+        SetUserInfo({...userInfo, [name]: res.data.secure_url})
+      }).catch(err=>console.log('somthing going to work.....'))
+
+      SetUserInfo({ ...userInfo, [name]: profile_image});
+      console.log(userInfo)
+  }
+
 
   return (
     <div className="w-100 mx-auto  p-10">  
@@ -215,12 +244,11 @@ const EditProfile = ({loggedUserInfo, match}) => {
             <div className="col-md-12">
               <div className="form-group form-control-alternative">
                 <input
-                  type="text"
+                  type="file"
                   className="form-control"
                   placeholder="Profile Picture"
                   name="profileImage"
-                  value={userInfo.profileImage}
-                  onChange={e => onChangeEvent(e)}
+                  onChange={e=>onUploadProfile(e)}
                 />
               </div>
             </div>

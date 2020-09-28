@@ -8,9 +8,7 @@ const ProfileInfo = () => {
   const { user } = useSelector((user) => user)
   let { data } = user
 
-  data = data ? data :JSON.parse(unescape(atob((localStorage.getItem('logged_')))) )
-
-  console.log(data)
+  data = data ? data.data :JSON.parse(unescape(atob((localStorage.getItem('logged_')))) )
 
   const { firstname, lastname, bloodGroup, gender, dateOfBirth, mobileNumber, alternateNumber, address, state, pincode, country, professionalStatus, profileImage } = data;
 
@@ -25,7 +23,7 @@ const ProfileInfo = () => {
   }
 
   return (
-    <div style={{height: '100vh', overflow: 'overlay'}}>
+    <div style={{ maxHeight: '562px',overflowY: 'scroll',position: 'fixed'}}>
       <div className="main-content" id="panel">
 
         <div className="header pb-6 d-flex align-items-center" style={{ minHeight: '500px', backgroundImage: 'url(../assets/img/theme/profile-cover.jpg)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
@@ -35,7 +33,7 @@ const ProfileInfo = () => {
           <div className="container-fluid d-flex align-items-center">
             <div className="row">
               <div className="col-lg-7 col-md-10">
-                <h1 className="display-2 text-white">Hello Jesse</h1>
+                <h1 className="display-2 text-white">Hello {firstname}</h1>
                 <p className="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
                 {/* <Link to="#" className="btn btn-neutral">Edit profile</Link> */}
               </div>
@@ -204,6 +202,7 @@ const ProfileInfo = () => {
             </div>
           </div>
           {/* Footer */}
+          <br/><br/>
           <footer className="footer pt-0">
             <div className="row align-items-center justify-content-lg-between">
               <div className="col-lg-6">

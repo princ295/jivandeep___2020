@@ -50,11 +50,11 @@ const Transplant = (props) => {
                         </div>
                         <div className="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
                             <p className="description">Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-                            <button type="button" class="btn btn-secondary btn-lg btn-block">Processed</button>
+                            <NavLink to="/dashboard/cadover"><button type="button" className=" btn btn-secondary btn-lg btn-block" data-toggle="modal" data-target=".bd-example-modal-xl">Processed</button></NavLink>
                         </div>
                         <div className="tab-pane fade" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
                             <p className="description">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
-                            <button type="button" class="btn btn-secondary btn-lg btn-block">Processed</button>
+                            <NavLink to="/dashboard/paired"><button type="button" className=" btn btn-secondary btn-lg btn-block" data-toggle="modal" data-target=".bd-example-modal-xl">Processed</button></NavLink>
                         </div>
                       </div>
                   </div>

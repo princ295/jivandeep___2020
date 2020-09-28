@@ -5,136 +5,182 @@ import $ from "jquery";
 import "../style/Family.css";
 const Family = () => {
 
-   const [obj, setObj] = useState({})
+   const [obj, setObj] = useState({
 
-  //    Stepper form JS Code
-   useEffect(() => {
-    var i;
-    var base_color = "white";
-    var active_color = "rgb(237, 40, 70)";
+   })
 
-    var child = 1;
-    var length = $("section").length - 1;
-    $("#prev").addClass("disabled");
-    $("#submit").addClass("disabled");
-
-    $("section").not("section:nth-of-type(1)").hide();
-    $("section")
-      .not("section:nth-of-type(1)")
-      .css("transform", "translateX(100px)");
-
-    var svgWidth = length * 200 + 24;
-    $("#svg_wrap").html(
-      '<svg version="1.1" id="svg_form_time" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 ' +
-        svgWidth +
-        ' 24" xml:space="preserve"></svg>'
-    );
-
-    function makeSVG(tag, attrs) {
-      var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
-      for (var k in attrs) el.setAttribute(k, attrs[k]);
-      return el;
-    }
-
-    for (i = 0; i < length; i++) {
-      var positionX = 12 + i * 200;
-      var rect = makeSVG("rect", { x: positionX, y: 9, width: 200, height: 6 });
-      document.getElementById("svg_form_time").appendChild(rect);
-      // <g><rect x="12" y="9" width="200" height="6"></rect></g>'
-      var circle = makeSVG("circle", {
-        cx: positionX,
-        cy: 12,
-        r: 12,
-        width: positionX,
-        height: 6,
-      });
-      document.getElementById("svg_form_time").appendChild(circle);
-    }
-
-    var circle = makeSVG("circle", {
-      cx: positionX + 200,
-      cy: 12,
-      r: 12,
-      width: positionX,
-      height: 6,
-    });
-    document.getElementById("svg_form_time").appendChild(circle);
-
-    $("circle:nth-of-type(1)").css("fill", active_color);
-
-    $(".button").click(function () {
-      $("#svg_form_time rect").css("fill", active_color);
-      $("#svg_form_time circle").css("fill", active_color);
-      var id = $(this).attr("id");
-      if (id == "next") {
-        $("#prev").removeClass("disabled");
-        if (child >= length) {
-          $(this).addClass("disabled");
-          $("#submit").removeClass("disabled");
-        }
-        if (child <= length) {
-          child++;
-        }
-      } else if (id == "prev") {
-        $("#next").removeClass("disabled");
-        $("#submit").addClass("disabled");
-        if (child <= 2) {
-          $(this).addClass("disabled");
-        }
-        if (child > 1) {
-          child--;
-        }
-      }
-      var circle_child = child + 1;
-      $("#svg_form_time rect:nth-of-type(n + " + child + ")").css(
-        "fill",
-        base_color
-      );
-      $("#svg_form_time circle:nth-of-type(n + " + circle_child + ")").css(
-        "fill",
-        base_color
-      );
-      var currentSection = $("section:nth-of-type(" + child + ")");
-      currentSection.fadeIn();
-      currentSection.css("transform", "translateX(0)");
-      currentSection.prevAll("section").css("transform", "translateX(-100px)");
-      currentSection.nextAll("section").css("transform", "translateX(100px)");
-      $("section").not(currentSection).hide();
-    });
-
-    // new Remove and Add Input type
-    $(function () {
-      $(document)
-        .on("click", ".btn-add", function (e) {
-          e.preventDefault();
-
-          var dynaForm = $(".dynamic-wrap form:first"),
-            currentEntry = $(this).parents(".entry:first"),
-            newEntry = $(currentEntry.clone()).appendTo(dynaForm);
-
-          newEntry.find("input").val("");
-          dynaForm
-            .find(".entry:not(:last) .btn-add")
-            .removeClass("btn-add")
-            .addClass("btn-remove")
-            .removeClass("btn-success")
-            .addClass("btn-danger")
-            .html('<span class="glyphicon glyphicon-minus">Remove</span>');
-        })
-        .on("click", ".btn-remove", function (e) {
-          $(this).parents(".entry:first").remove();
-
-          e.preventDefault();
-          return false;
-        });
-    });
+   const [doner, setDoner] = useState({
+    firstname: '',
+    lastname: '',
+    bloodGroup: '',
+    gender: '',
+    dateOfBirth: '',
+    mobileNumber: '',
+    alternateNumber: '',
+    address: '',
+    state: '',
+    pincode: '',
+    country: '',
+    professionalStatus: '',
+    profileImage: ''
   })
 
+  const uploadedurl = '';
 
-    return (
-      <div style={{overflowY: 'scroll', height: '100vh'}}>
-        {/* Main content */}
-        <div className="main-content" id="panel">
+  function onChangeEvent(e){
+    console.log('chaneg evevnt call ...........')
+    console.log(e.target.name)
+    console.log(e.target.value)
+    setDoner({...doner,[e.target.name]: e.target.value});
+
+    console.log(doner)
+  }
+
+
+  // //Stepper form JS Code
+  //  useEffect(() => {
+  //   var i;
+  //   var base_color = "white";
+  //   var active_color = "rgb(237, 40, 70)";
+
+  //   var child = 1;
+  //   var length = $("section").length - 1;
+  //   $("#prev").addClass("disabled");
+  //   $("#submit").addClass("disabled");
+
+  //   $("section").not("section:nth-of-type(1)").hide();
+  //   $("section")
+  //     .not("section:nth-of-type(1)")
+  //     .css("transform", "translateX(100px)");
+
+  //   var svgWidth = length * 200 + 24;
+  //   $("#svg_wrap").html(
+  //     '<svg version="1.1" id="svg_form_time" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 ' +
+  //       svgWidth +
+  //       ' 24" xml:space="preserve"></svg>'
+  //   );
+
+  //   function makeSVG(tag, attrs) {
+  //     var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  //     for (var k in attrs) el.setAttribute(k, attrs[k]);
+  //     return el;
+  //   }
+
+  //   for (i = 0; i < length; i++) {
+  //     var positionX = 12 + i * 200;
+  //     var rect = makeSVG("rect", { x: positionX, y: 9, width: 200, height: 6 });
+  //     document.getElementById("svg_form_time").appendChild(rect);
+  //     // <g><rect x="12" y="9" width="200" height="6"></rect></g>'
+  //     var circle = makeSVG("circle", {
+  //       cx: positionX,
+  //       cy: 12,
+  //       r: 12,
+  //       width: positionX,
+  //       height: 6,
+  //     });
+  //     document.getElementById("svg_form_time").appendChild(circle);
+  //   }
+
+  //   var circle = makeSVG("circle", {
+  //     cx: positionX + 200,
+  //     cy: 12,
+  //     r: 12,
+  //     width: positionX,
+  //     height: 6,
+  //   });
+  //   document.getElementById("svg_form_time").appendChild(circle);
+
+  //   $("circle:nth-of-type(1)").css("fill", active_color);
+
+  //   $(".button").click(function () {
+  //     $("#svg_form_time rect").css("fill", active_color);
+  //     $("#svg_form_time circle").css("fill", active_color);
+  //     var id = $(this).attr("id");
+  //     if (id == "next") {
+  //       $("#prev").removeClass("disabled");
+  //       if (child >= length) {
+  //         $(this).addClass("disabled");
+  //         $("#submit").removeClass("disabled");
+  //       }
+  //       if (child <= length) {
+  //         child++;
+  //       }
+  //     } else if (id == "prev") {
+  //       $("#next").removeClass("disabled");
+  //       $("#submit").addClass("disabled");
+  //       if (child <= 2) {
+  //         $(this).addClass("disabled");
+  //       }
+  //       if (child > 1) {
+  //         child--;
+  //       }
+  //     }
+  //     var circle_child = child + 1;
+  //     $("#svg_form_time rect:nth-of-type(n + " + child + ")").css(
+  //       "fill",
+  //       base_color
+  //     );
+  //     $("#svg_form_time circle:nth-of-type(n + " + circle_child + ")").css(
+  //       "fill",
+  //       base_color
+  //     );
+  //     var currentSection = $("section:nth-of-type(" + child + ")");
+  //     currentSection.fadeIn();
+  //     currentSection.css("transform", "translateX(0)");
+  //     currentSection.prevAll("section").css("transform", "translateX(-100px)");
+  //     currentSection.nextAll("section").css("transform", "translateX(100px)");
+  //     $("section").not(currentSection).hide();
+  //   });
+
+  // //   // new Remove and Add Input type
+  // //   $(function () {
+  // //     $(document)
+  // //       .on("click", ".btn-add", function (e) {
+  // //         e.preventDefault();
+
+  // //         var dynaForm = $(".dynamic-wrap form:first"),
+  // //         currentEntry = $(this).parents(".entry:first"),
+  // //         newEntry = $(currentEntry.clone()).appendTo(dynaForm);
+
+  // //         newEntry.find("input").val("");
+  // //         dynaForm
+  // //           .find(".entry:not(:last) .btn-add")
+  // //           .removeClass("btn-add")
+  // //           .addClass("btn-remove")
+  // //           .removeClass("btn-success")
+  // //           .addClass("btn-danger")
+  // //           .html('<span class="glyphicon glyphicon-minus">Remove</span>');
+  // //       })
+  // //       .on("click", ".btn-remove", function (e) {
+  // //         $(this).parents(".entry:first").remove();
+
+  // //         e.preventDefault();
+  // //         return false;
+  // //       });
+  // //   });
+  // })
+
+
+  // **********************************************************************************brack point
+
+  // const onChangeEvent = (e)=>{
+
+  //   console.log('onUpload Image method caLl..')
+  //   // const file = e.target.files;
+  //   // const data = new FormData()
+
+  //   // data.append('file', file[0])
+  //   // data.append('upload_preset', 'JivandeepImages') 
+
+  //   //cloudinary api call
+  // }
+
+  
+
+  return (
+    <div style={{overflowY: 'scroll', height: '100vh'}}>
+      {/* Main content */}
+      <div className="main-content" id="panel">
           {/* Header */}
           <div className="header bg-primary pb-4">
             <div className="container-fluid">
@@ -168,6 +214,7 @@ const Family = () => {
                       PAN Card / Aadhar Card / Voter Information / Driving
                       Licence
                     </h6>
+
                     <div className="row">
                       <div className="col-md-4">
                         <input
@@ -183,6 +230,7 @@ const Family = () => {
                         <input
                           type="file"
                           className="form-control shadow-none"
+                          onChange={e => onChangeEvent(e)}
                         />
                       </div>
                       <div className="col-sm-1" style={{ paddingTop: 18 }}>
@@ -213,6 +261,7 @@ const Family = () => {
                                 name="fields[]"
                                 type="file"
                                 placeholder="Type something"
+                                onChange={e => onChangeEvent(e)}
                               />
                               &nbsp;
                               <span
@@ -242,6 +291,9 @@ const Family = () => {
 
                     {/* End new Remove and Add Input type*/}
                   </section>
+
+                    {/* ***************Doner profile info******************* */}
+
                   <section>
                     <p>Donor Profile</p>
                     {/* row 1st */}
@@ -255,6 +307,8 @@ const Family = () => {
                             type="text"
                             placeholder="Name"
                             className="form-control"
+                            name="firstname"
+                            onChange={e=>onChangeEvent(e)}
                           />
                         </div>
                       </div>
@@ -284,6 +338,7 @@ const Family = () => {
                         </div>
                       </div>
                     </div>
+
 
                     {/* row 2nd */}
                     <div className="row">
@@ -469,6 +524,9 @@ const Family = () => {
                       </div>
                     </div>
                   </section>
+
+
+
                   <section>
                     <p>Identity Documents of Donor</p>
 
@@ -518,9 +576,10 @@ const Family = () => {
                             <div className="entry input-group">
                               <input
                                 className="form-control"
-                                name="fields[]"
+                                name="fields"
                                 type="file"
                                 placeholder="Type something"
+                                onChange={e => onChangeEvent(e)}
                               />
                               &nbsp;
                               <span
@@ -632,8 +691,8 @@ const Family = () => {
             </footer>
           </div>
         </div>
-      </div>
-    );
+    </div>
+  );
   
 }
 
